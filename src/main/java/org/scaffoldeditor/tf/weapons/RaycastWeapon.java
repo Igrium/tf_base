@@ -1,5 +1,6 @@
 package org.scaffoldeditor.tf.weapons;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,12 +13,18 @@ public abstract class RaycastWeapon extends Weapon {
 
     public RaycastWeapon(ItemStack item) {
         super(item);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public boolean fire(Player player) {
         return false;
     }
+    
+    /**
+     * Called when the weapon hits an entity.
+     * @param entity Entity that was hit.
+     * @param player Player who fired the weapon.
+     */
+    protected abstract void onHitEntity(Entity entity, Player player);
 
 }
