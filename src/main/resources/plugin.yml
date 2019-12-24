@@ -4,3 +4,4 @@ api-version: 1.13
 author: Sam54123
 main: org.scaffoldeditor.tf.TFMain
 description: The companion code for LORENZODMJ's TF2 in Minecraft project.
+depend: [NBTAPI]
