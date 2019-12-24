@@ -1,5 +1,7 @@
 package org.scaffoldeditor.tf.weapons;
 
+import java.util.Random;
+
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -34,12 +36,34 @@ public abstract class RaycastWeapon extends Weapon {
         return true;
     }
     
+    /**
+     * Perform a raycast with the weapon.
+     * @param player Player who fired the weapon.
+     */
     protected void performRaycast(Player player) {
-     // Offset the start location so the player doesn't shoot themself.
+        // Offset the start location so the player doesn't shoot themself.
         Location startLocation = player.getEyeLocation().add(player.getEyeLocation().getDirection().multiply(weaponStartOffset));
+        
+        // Do random spread.
+        Location direction = player.getEyeLocation();
+        double randomSpread = getRandomSpread();
+        
+        if (randomSpread > 0) {
+            Random random = new Random();
+            double spreadPitch = random.nextDouble() * randomSpread;
+            direction.setPitch((float) (random.nextBoolean() ? direction.getPitch() - spreadPitch : direction.getPitch() + spreadPitch));
+            
+            double spreadYaw = random.nextDouble() * randomSpread;
+            direction.setYaw((float) (random.nextBoolean() ? direction.getYaw() - spreadYaw : direction.getYaw() + spreadYaw));
+        }
+        
         RayTraceResult result = player.getWorld().rayTrace(
-                startLocation, player.getEyeLocation().getDirection(), getMaxFireDistance(),
+                startLocation, direction.getDirection(), getMaxFireDistance(),
                 FluidCollisionMode.NEVER, true, 0.1, null);
+        
+        if (result == null) {
+            return;
+        }
         
         if (result.getHitEntity() != null) {
             onHitEntity(result.getHitEntity(), player, result);
@@ -50,10 +74,16 @@ public abstract class RaycastWeapon extends Weapon {
     }
     
     /**
-     * Get the weapon's max fireing distance.
+     * Get the weapon's max firing distance.
      * @return Max fire distance.
      */
     protected abstract double getMaxFireDistance();
+    
+    /**
+     * Get the weapon's max random spread.
+     * @return Max random spread (in degrees)
+     */
+    protected abstract double getRandomSpread();
     
     /**
      * Called when this weapon hits an entity.

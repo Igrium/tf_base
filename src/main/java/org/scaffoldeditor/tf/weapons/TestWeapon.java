@@ -27,7 +27,10 @@ public class TestWeapon extends RaycastWeapon {
         return 50;
     }
 
-
+    @Override
+    protected double getRandomSpread() {
+        return 2;
+    }
 
     @Override
     protected void onHitEntity(Entity entity, Player player, RayTraceResult rayTraceResult) {
@@ -41,4 +44,5 @@ public class TestWeapon extends RaycastWeapon {
     protected void onHitBlock(Block block, Player player, RayTraceResult rayTraceResult) {
         block.getWorld().playEffect(rayTraceResult.getHitPosition().toLocation(block.getWorld()), Effect.SMOKE, 31);
     }
+
 }
