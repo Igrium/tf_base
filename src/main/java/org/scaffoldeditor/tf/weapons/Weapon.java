@@ -36,16 +36,28 @@ public abstract class Weapon {
     public abstract boolean fire(Player player);
     
     /**
+     * Tests to see if the weapon can fire.
+     * @return Can the weapon fire?
+     */
+    public abstract boolean canFire();
+    
+    /**
      * Check if this weapon has a secondary fire.
-     * @return Has secondary fire.
+     * @return Has secondary fire?
      */
     public boolean hasSecondaryFire() { return false; };
     
     /**
-     * 
+     * Called when the weapon's secondary fire is activated.
      * @param player
      */
     public void secondaryFire(Player player) {};
+    
+    /**
+     * Tests to see if the weapon's secondary fire is ready to be used.
+     * @return Can secondary fire?
+     */
+    public boolean canSecondaryFire() { return false; };
     
     /**
      * Determine whether this weapon can be reloaded.
