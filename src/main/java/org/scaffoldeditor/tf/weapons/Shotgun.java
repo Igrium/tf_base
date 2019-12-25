@@ -31,7 +31,7 @@ public class Shotgun extends RaycastWeapon {
             // Do the appropriate amount of damage.
             int damageAmount = 1;
             for (LivingEntity e : hitCount.keySet()) {
-//                e.damage(damageAmount * hitCount.get(e));
+                e.damage(damageAmount * hitCount.get(e));
             }
             
             return true;
