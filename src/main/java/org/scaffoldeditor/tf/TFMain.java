@@ -1,6 +1,7 @@
 package org.scaffoldeditor.tf;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.scaffoldeditor.tf.weapons.Shotgun;
 import org.scaffoldeditor.tf.weapons.TestWeapon;
 import org.scaffoldeditor.tf.weapons.Weapon;
 import org.scaffoldeditor.tf.weapons.WeaponEvents;
@@ -25,5 +26,6 @@ public class TFMain extends JavaPlugin {
     
     public void registerWeapons() {
         Weapon.registerWeapon("tf:testweapon", TestWeapon.class);
+        Weapon.registerWeapon("tf:shotgun", Shotgun.class);
     }
 }

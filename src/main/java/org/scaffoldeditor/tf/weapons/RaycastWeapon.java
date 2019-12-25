@@ -46,11 +46,11 @@ public abstract class RaycastWeapon extends Weapon {
         
         // Do random spread.
         Location direction = player.getEyeLocation();
-        double randomSpread = getRandomSpread();
+        float randomSpread = getRandomSpread();
         
         if (randomSpread > 0) {
             Random random = new Random();
-            double spreadPitch = random.nextDouble() * randomSpread;
+            float spreadPitch = random.nextFloat() * randomSpread;
             direction.setPitch((float) (random.nextBoolean() ? direction.getPitch() - spreadPitch : direction.getPitch() + spreadPitch));
             
             double spreadYaw = random.nextDouble() * randomSpread;
@@ -83,7 +83,7 @@ public abstract class RaycastWeapon extends Weapon {
      * Get the weapon's max random spread.
      * @return Max random spread (in degrees)
      */
-    protected abstract double getRandomSpread();
+    protected abstract float getRandomSpread();
     
     /**
      * Called when this weapon hits an entity.

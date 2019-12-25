@@ -28,8 +28,8 @@ public class TestWeapon extends RaycastWeapon {
     }
 
     @Override
-    protected double getRandomSpread() {
-        return 2;
+    protected float getRandomSpread() {
+        return 0;
     }
 
     @Override
