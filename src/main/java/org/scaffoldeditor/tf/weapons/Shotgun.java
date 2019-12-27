@@ -9,17 +9,18 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.RayTraceResult;
 
 public class Shotgun extends RaycastWeapon {
     
+    public Shotgun(ItemStack item, Plugin plugin) {
+        super(item, plugin);
+    }
+
     // Keep track of the amount of times each entity has been hit so the proper amount of damage can be administered.
     private Map<LivingEntity, Integer> hitCount = new HashMap<LivingEntity, Integer>();
 
-    public Shotgun(ItemStack item) {
-        super(item);
-    }
-    
     @Override
     public boolean fire(Player player) {
         if (canFire()) {

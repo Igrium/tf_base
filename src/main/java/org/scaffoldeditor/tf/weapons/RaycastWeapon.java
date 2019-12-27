@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.RayTraceResult;
 
 /**
@@ -16,14 +17,14 @@ import org.bukkit.util.RayTraceResult;
  *
  */
 public abstract class RaycastWeapon extends Weapon {
-    
+
     /**
      * How much to offset the raycast from its fire location (so the player doesn't shoot themself).
      */
     protected double weaponStartOffset = 2;
 
-    public RaycastWeapon(ItemStack item) {
-        super(item);
+    public RaycastWeapon(ItemStack item, Plugin plugin) {
+        super(item, plugin);
     }
 
     @Override

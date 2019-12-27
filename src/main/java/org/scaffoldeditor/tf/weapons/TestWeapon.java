@@ -5,16 +5,18 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.RayTraceResult;
 
 public class TestWeapon extends RaycastWeapon {
-
-    public TestWeapon(ItemStack item) {
-        super(item);
+    
+    
+    public TestWeapon(ItemStack item, Plugin plugin) {
+        super(item, plugin);
     }
 
-    
-    
+
+
     @Override
     public boolean canFire() {
         return true;

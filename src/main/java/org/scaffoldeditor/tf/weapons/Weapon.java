@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 /**
  * Represents a Team Fortress weapon.
@@ -21,11 +22,18 @@ public abstract class Weapon {
     protected final ItemStack item;
     
     /**
+     * The plugin this weapon is registered with.
+     */
+    protected final Plugin plugin;
+    
+    /**
      * Create a weapon object.
      * @param item ItemStack to pair with (for data storage).
+     * @param plugin Plugin to register the weapon with.
      */
-    public Weapon(ItemStack item) {
+    public Weapon(ItemStack item, Plugin plugin) {
         this.item = item;
+        this.plugin = plugin;
     }
     
     /**
@@ -110,6 +118,18 @@ public abstract class Weapon {
      */
     public void setTotalAmmo(int ammo) {};
     
+    private static Plugin registerPlugin = null;
+    
+    /**
+     * Set the plugin to register weapons with.
+     * <br>
+     * MUST BE SET BEFORE SOME WEAPONS CAN BE USED!
+     * @param plugin Plugin to register weapons with.
+     */
+    public static void setRegisterPlugin(Plugin plugin) {
+        registerPlugin = plugin;
+    }
+    
     /**
      * A hashmap storing all the weapon types with their namespaced names.
      */
@@ -167,7 +187,7 @@ public abstract class Weapon {
         
         try {
             Weapon weapon;
-            weapon = weaponClass.getDeclaredConstructor(new Class[] {ItemStack.class}).newInstance(item);
+            weapon = weaponClass.getDeclaredConstructor(new Class[] {ItemStack.class, Plugin.class}).newInstance(item, registerPlugin);
             return weapon;
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
